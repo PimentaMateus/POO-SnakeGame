@@ -10,6 +10,7 @@ public class Janela extends JPanel {
     //Container c = JFrame.getContentPane();
 
     public Janela(String nome){
+
         frame = new JFrame(nome);
         frame.add(this);
         this.setBackground(Color.green);

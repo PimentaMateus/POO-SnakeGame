@@ -1,13 +1,15 @@
 import java.awt.Color;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 public class Menu extends JPanel{
     private static int posLabel = 150;
     private  static  int tamLabel = 80;
     private JFrame frame;
 
-    public Menu(String titulo){
+
+    public Menu(String titulo, boolean estado){
         frame = new JFrame(titulo);
         frame.setSize(500, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -15,9 +17,10 @@ public class Menu extends JPanel{
         JPanel painel = new JPanel();
         frame.add(painel);
         inserirDados(painel);
-        frame.setVisible(true);
+        frame.setVisible(estado);
+
     }
-    private static void inserirDados(JPanel painel) {
+    public void inserirDados(JPanel painel) {
         painel.setLayout(null);
         // rótulos e campos
         JLabel rotuloPontos = new JLabel("Pontuação máxima");
@@ -56,6 +59,12 @@ public class Menu extends JPanel{
         campoDificuldade.setBounds(posLabel, 100, tamLabel, 25);
         painel.add(campoDificuldade);
 
+        JButton botaoIr = new JButton("Começar");
+        botaoIr.setBounds(10, 130, 120, 25);
+        painel.add(botaoIr);
 
+        ActionListener leitor_botoes = new BotaoMenu();
+        botaoIr.addActionListener(leitor_botoes);
 
-    }}
+        }
+}
