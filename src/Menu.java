@@ -12,7 +12,7 @@ public class Menu extends JPanel{
     public Menu(String titulo, boolean estado){
         frame = new JFrame(titulo);
         frame.setSize(500, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBackground(Color.BLUE);//Não funciona: Rever
         JPanel painel = new JPanel();
         frame.add(painel);
@@ -63,8 +63,8 @@ public class Menu extends JPanel{
         botaoIr.setBounds(10, 130, 120, 25);
         painel.add(botaoIr);
 
-        ActionListener leitor_botoes = new BotaoMenu();
-        botaoIr.addActionListener(leitor_botoes);
+//        ActionListener leitor_botoes = new BotaoMenu();
+//        botaoIr.addActionListener(leitor_botoes);
 
-        }
+    }
 }

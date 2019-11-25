@@ -26,4 +26,5 @@ public class Janela extends JPanel {
         g2d.setColor(Color.RED);
         g2d.setFont(new Font("Comic Sans", Font.BOLD, 14));
         g2d.drawString("Pontos: " + String.valueOf(contador), 10, 30);
-    }}
+    }
+}
