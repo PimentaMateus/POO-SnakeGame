@@ -2,27 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Character extends JPanel {
-    int x, y = 50;
+    public Character() {
+        setPreferredSize(new Dimension(150,150));
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawRect(x,y, 50,50);
         super.paintComponent(g);
-    }
-
-    public void moveUp() {
-        y--;
-    }
-
-    public void moveDown() {
-        y++;
-    }
-
-    public void moveLeft() {
-        x--;
-    }
-
-    public void moveRight() {
-        x++;
+        g.setColor(Color.BLUE);
+//        g.setPaintMode();
+        g.drawRect(0,0, 150,150);
     }
 
 }

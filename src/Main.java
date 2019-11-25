@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 public class Main {
 
-    private static Character comp;
-
     public static void main(String[] args){
 //        Menu menuPrincipal = new Menu("Configurações", true);
         //fazer um if para caso o botao seja seleionado abrir a prox tela
@@ -31,13 +29,16 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.setBackground(Color.BLUE);//Não funciona: Rever
         frame.setLayout(null);
-        Panel gamePane = new Panel();
-        frame.setContentPane(gamePane);
-        Main.comp = new Character();
-        Character comp = Main.comp;
+        Panel gameDrawingAread = new Panel();
+        gameDrawingAread.setPreferredSize(new Dimension(800, 600));
+        frame.setContentPane(gameDrawingAread);
+        Character character = new Character();
+//        character.setPreferredSize(new Dimension(800,600));
 
-        gamePane.add(comp);
+        gameDrawingAread.add(character);
+//        frame.getContentPane().add(comp);
 
+        frame.pack();
         frame.setVisible(true);
 
         frame.addKeyListener(new KeyAdapter() {
