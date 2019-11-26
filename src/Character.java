@@ -1,40 +1,45 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Character {
-    int x= 50, y = 50;
+    int x= 0, y = 0;
+    private int tam = 20;
 
-//    Direcao dir;
+    private int key = KeyEvent.VK_RIGHT;
+
+    private Map<Integer, Runnable> movimentos;
+
+    public void setKey (int key) {
+        this.key = key;
+    }
 
     public Character() {
+        movimentos = new HashMap<>();
+        movimentos.put(KeyEvent.VK_UP, () -> y-=tam);
+        movimentos.put(KeyEvent.VK_DOWN, () -> y+=tam);
+        movimentos.put(KeyEvent.VK_LEFT, () -> x-=tam);
+        movimentos.put(KeyEvent.VK_RIGHT, () -> x+=tam);
     }
 
     protected void desenhar(Graphics g) {
         g.setColor(Color.BLUE);
-//        g.fillOval(x,y, 20,20);
-        g.fillArc(x,y,20,20, 30, 300);
-//        g.drawOval(x,y, 20,20);
-        g.setColor(Color.GREEN);
-        g.fillOval(x-10,y, 15, 15);
+        int angle = getAngle();
+        g.fillArc(x,y,tam,tam, angle + 30, 300);
+        mover();
     }
 
-    public void moveUp() {
-        y--;
+    private void mover() {
+        movimentos.get(key).run();
     }
 
-    public void moveDown() {
-        y++;
+    private int getAngle() {
+        if (key == KeyEvent.VK_RIGHT) return 0;
+        if (key == KeyEvent.VK_LEFT) return 180;
+        if (key == KeyEvent.VK_UP) return 90;
+        if (key == KeyEvent.VK_DOWN) return 270;
+        return 0;
     }
-
-    public void moveLeft() {
-        x--;
-    }
-
-    public void moveRight() {
-        x++;
-    }
-
 
 }
