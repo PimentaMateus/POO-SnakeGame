@@ -10,13 +10,14 @@ public class Main {
     public static void main(String[] args){
         JFrame frame = new JFrame("Snaker");
 
-        AreaJogo gamePane = new AreaJogo();
-        frame.setContentPane(gamePane);
+        AreaJogo jogo = new AreaJogo();
+        frame.setContentPane(jogo);
+
         frame.setVisible(true);
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                gamePane.processarTecla(e);
+                jogo.processarTecla(e);
             }
         });
 
@@ -34,7 +35,7 @@ public class Main {
         menubar.add(menuPrincipal);
 
         JMenuItem startGame = new JMenuItem("Start game");
-        startGame.addActionListener( al -> gamePane.togglePause());
+        startGame.addActionListener( al -> jogo.togglePause());
         menubar.add(startGame);
 
         frame.setJMenuBar(menubar);
