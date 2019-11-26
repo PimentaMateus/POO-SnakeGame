@@ -3,7 +3,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Character {
+public class Character extends EntidadeJogo {
     int x= 0, y = 0;
     private int tam = 20;
     private boolean mudouDir = false;
@@ -25,7 +25,8 @@ public class Character {
         movimentos.put(KeyEvent.VK_RIGHT, () -> x+=tam);
     }
 
-    protected void desenhar(Graphics g) {
+    @Override
+    public void desenhar(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         g.setColor(Color.BLUE);
         int angle = getAngle();

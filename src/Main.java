@@ -1,10 +1,7 @@
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JButton;
+
 public class Main {
 
     public static void main(String[] args){
@@ -27,7 +24,7 @@ public class Main {
         JMenuItem configuracoes = new JMenuItem("Configurações");
 
         configuracoes.addActionListener(e -> {
-            new Menu("Configurações", true);
+            new JanelaConfiguracao("Configurações", true);
         });
 
         menuPrincipal.add(configuracoes);
