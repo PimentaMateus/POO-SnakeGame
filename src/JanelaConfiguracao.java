@@ -4,42 +4,56 @@ import java.awt.*;
 import static java.awt.GridBagConstraints.BOTH;
 
 public class JanelaConfiguracao extends JPanel{
-    private static int posLabel = 150;
-    private  static  int tamLabel = 80;
+    private JTextField campoAltura;
+    private JTextField campoLargura;
+    private JComboBox<Dificuldade> comboDificuldade;
+    private JTextField maxPontos;
 
     public JanelaConfiguracao(String titulo, boolean estado){
         JFrame frame = new JFrame(titulo);
-        frame.setSize(500, 300);
         JPanel painel = new JPanel();
-        frame.add(painel);
         montarFormConfiguracao(painel);
-        frame.setVisible(estado);
+        preencheValoresSalvos();
 
+        frame.add(painel);
+        frame.pack();
+        frame.setVisible(estado);
     }
+
+    public void preencheValoresSalvos() {
+        maxPontos.setText(String.valueOf(Configuracao.instance().pontucaoMaxima));
+        campoAltura.setText(String.valueOf(Configuracao.instance().tamanho.height));
+        campoLargura.setText(String.valueOf(Configuracao.instance().tamanho.width));
+        comboDificuldade.getModel().setSelectedItem(Configuracao.instance().dificuldade);
+    }
+
     private void montarFormConfiguracao(JPanel painel) {
         painel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JTextField maxPontos = campoPontuacao(painel, c);
+        maxPontos = campoPontuacao(painel, c);
 
         rotuloTerritorio(painel, c);
 
-        JTextField campoAltura = campoAltura(painel, c);
+        campoAltura = campoAltura(painel, c);
 
-        JTextField campoComprimento = campoComprimento(painel, c);
+        campoLargura = campoComprimento(painel, c);
 
-        campoDificuldade(painel, c);
+        comboDificuldade = campoDificuldade(painel, c);
 
+        botoes(painel, c);
+    }
+
+    private void botoes(JPanel painel, GridBagConstraints c) {
         JButton botaoSalvar = new JButton("Salvar");
-        c.gridx = 0;
+        c.gridx = 3;
         c.gridy = 4;
-        c.ipady = 2;
         c.fill = BOTH;
         painel.add(botaoSalvar, c);
         botaoSalvar.addActionListener( l -> {
-            Configuracao.instance().tamanho = new Dimension(Integer.parseInt(campoComprimento.getText().trim()), Integer.parseInt(campoAltura.getText().trim()));
+            Configuracao.instance().tamanho = new Dimension(Integer.parseInt(campoLargura.getText().trim()), Integer.parseInt(campoAltura.getText().trim()));
             Configuracao.instance().pontucaoMaxima = Integer.parseInt(maxPontos.getText().trim());
-
+            Configuracao.instance().dificuldade = (Dificuldade) comboDificuldade.getSelectedItem();
             Configuracao.salvar();
         });
     }
@@ -48,10 +62,11 @@ public class JanelaConfiguracao extends JPanel{
         JLabel rotuloTerritorio = new JLabel("Tamanho do Territorio:");
         c.gridx = 0;
         c.gridy = 1;
+        c.ipady = 4;
         painel.add(rotuloTerritorio, c);
     }
 
-    private void campoDificuldade(JPanel painel, GridBagConstraints c) {
+    private JComboBox<Dificuldade> campoDificuldade(JPanel painel, GridBagConstraints c) {
         JLabel rotuloDificuldade = new JLabel("Nivel de Dificuldade:");
         Insets insets = new Insets(3, 3, 3, 3);
 
@@ -65,11 +80,13 @@ public class JanelaConfiguracao extends JPanel{
         comboDificuldade.addItem(Dificuldade.MEDIO);
         comboDificuldade.addItem(Dificuldade.DIFICIL);
         c.gridx = 1;
-        c.ipadx = 3;
         c.gridy = 3;
+        c.ipadx = 3;
         c.fill = BOTH;
         c.insets = insets;
         painel.add(comboDificuldade, c);
+
+        return comboDificuldade;
     }
 
     private JTextField campoComprimento(JPanel painel, GridBagConstraints c) {

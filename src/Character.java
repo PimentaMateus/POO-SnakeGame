@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Character extends EntidadeJogo {
     int x= 0, y = 0;
@@ -27,7 +28,7 @@ public class Character extends EntidadeJogo {
 
     @Override
     public void desenhar(Graphics g) {
-        Toolkit.getDefaultToolkit().sync();
+        mover();
         g.setColor(Color.BLUE);
         int angle = getAngle();
         g.fillArc(x,y,tam,tam, angle + 30, 300);

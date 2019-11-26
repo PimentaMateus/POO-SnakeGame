@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class AreaJogo extends JPanel {
@@ -11,6 +13,8 @@ public class AreaJogo extends JPanel {
     private int ultimaTecla = KeyEvent.VK_RIGHT;
     private Set<Integer> teclas;
     private Integer pontuacao = 0;
+    private List<Frutinha> frutinhas = new ArrayList<>();
+    private int ticks = 0;
 
     public AreaJogo() {
         teclas = new HashSet<>();
@@ -23,6 +27,7 @@ public class AreaJogo extends JPanel {
 
     public void novoJogo() {
         pontuacao = 0;
+        ticks = 0;
         this.c = new Character();
         timer = new Timer(500, this::refreshArea);
         timer.start();
@@ -43,6 +48,11 @@ public class AreaJogo extends JPanel {
 
         c.setKey(ultimaTecla);
         c.desenhar(g);
+
+        for (Frutinha frutinha : frutinhas) {
+            frutinha.desenhar(g);
+        }
+
         c.avaliar(new Validavel() {
             @Override
             public void pos(int x, int y, int alt, int larg) {
@@ -64,12 +74,18 @@ public class AreaJogo extends JPanel {
     }
 
     private void refreshArea(ActionEvent actionEvent) {
+
+        if (ticks % 5 == 0) {
+            frutinhas.add(new Frutinha());
+        }
         try {
             repaint();
+            ticks++;
         } catch (FimDeJogo fimDeJogo) {
             timer.stop();
             JOptionPane.showMessageDialog(this, "ACABOU");
         }
+        Toolkit.getDefaultToolkit().sync();
     }
 
     public static class FimDeJogo extends RuntimeException {
