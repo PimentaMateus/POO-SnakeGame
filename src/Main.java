@@ -3,16 +3,11 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JButton;
 public class Main {
 
-    private static Character comp;
-
     public static void main(String[] args){
-//        Menu menuPrincipal = new Menu("Configurações", true);
-        //fazer um if para caso o botao seja seleionado abrir a prox tela
-
-
         JFrame frame = new JFrame("Snaker");
         JMenuBar menubar = new JMenuBar();
         JMenu menuPrincipal = new JMenu("Principal");
@@ -29,31 +24,32 @@ public class Main {
         frame.setJMenuBar(menubar);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setBackground(Color.BLUE);//Não funciona: Rever
-        frame.setLayout(null);
-        Panel gamePane = new Panel();
+
+        AreaJogo gamePane = new AreaJogo();
         frame.setContentPane(gamePane);
-        Main.comp = new Character();
-        Character comp = Main.comp;
-
-        gamePane.add(comp);
-
         frame.setVisible(true);
-
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println("Apertou " + e.getKeyCode());
-                super.keyPressed(e);
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                System.out.println("Soltou " + e.getKeyCode());
-                super.keyReleased(e);
+                gamePane.processarTecla(e);
             }
         });
-
+//        frame.addKeyListener(new KeyListener() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                gamePane.processarTecla(e);
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {
+//
+//            }
+//        });
     }
 
 }
